@@ -1,12 +1,15 @@
 package br.com.fiap.on_data.service;
 
+import br.com.fiap.on_data.controller.DTO.PacienteDTO;
 import br.com.fiap.on_data.model.Paciente;
 import br.com.fiap.on_data.repository.PacienteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 //TODO implementar a anotação @Trasactional e considerar DTO
@@ -17,20 +20,31 @@ public class PacienteService {
     private PacienteRepository pacienteRepository;
 
     @Transactional
-    public Paciente savePaciente(Paciente paciente) {
-        return pacienteRepository.save(paciente);
+    public PacienteDTO savePaciente(PacienteDTO pacienteDTO) {
+        Paciente paciente = pacienteDTO.toEntity();
+        return pacienteRepository.save(paciente).toDTO();
     }
 
-    public List<Paciente> getAllPacientes() {
-        return pacienteRepository.findAll();
+    public List<PacienteDTO> getAllPacientes() {
+        List<Paciente> pacientes = pacienteRepository.findAll();
+        return pacientes.stream()
+                .map(paciente -> paciente.toDTO())
+                .toList();
     }
 
-    public Paciente getPacienteById(Long id) {
-        return pacienteRepository.findById(id).orElse(null);
+    public PacienteDTO getPacienteById(Long id) {
+        Paciente paciente = pacienteRepository.findById(id).orElse(null);
+        return paciente.toDTO();
     }
 
-    public Paciente updatePacienteById(long id, Paciente paciente) {
-        return pacienteRepository.save(paciente);
+    public PacienteDTO updatePacienteById(long id, PacienteDTO pacienteDTO) {
+        Paciente pacienteToUpdate = pacienteRepository.findById(id);
+        pacienteToUpdate.setNome(pacienteDTO.getNome());
+        pacienteToUpdate.setEmail(pacienteDTO.getEmail());
+        pacienteToUpdate.setTelefone(pacienteDTO.getTelefone());
+        pacienteToUpdate.setEndereco(pacienteDTO.getEndereco());
+        pacienteToUpdate.setFumante(pacienteDTO.isFumante());
+        return pacienteRepository.save(pacienteToUpdate).toDTO();
     }
 
     public void deletePacienteById(long id) {
