@@ -2,16 +2,16 @@
 API REST desenvolvida com Java Springboot para o aplicativo On-Data, desenvolvido como solução de gerenciamento de sinistros para a Odontoprev.
 
 ## Equipe
-- Artur Lopes Fiorindo » 53481
-> [!NOTE] TESTE
+> Artur Lopes Fiorindo » 53481
+> 
 > responsável pela implementação do endpoint para ocorrências
 
-- Eduardo Felipe Nunes Função » 553362 
-> [!info]
+> Eduardo Felipe Nunes Função » 553362 
+> 
 > responsável pela implementação do endpoint para pacientes
 
-- Jhoe
-> [!info]
+> Jhoe
+> 
 > FALTA DETALHAR
  
 ## Funcionalidades
