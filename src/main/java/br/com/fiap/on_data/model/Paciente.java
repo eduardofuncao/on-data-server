@@ -19,17 +19,12 @@ public class Paciente {
     private int id;
 
     @Column(name = "cpf")
-    @Size(min = 11, max = 11, message = "CPF precisa ter exatamente 11 dígitos")
-    @NotBlank(message = "CPF não pode estar vazio")
     private String cpf;
 
     @Column(name = "nome")
-    @Size(min = 3, max = 100, message = "Nome precisa ter de 3 a 100 caracteres")
-    @NotBlank(message = "Nome não pode estar vazio")
     private String nome;
 
     @Column(name = "email")
-    @Email(message = "Email com formato inválido")
     private String email;
 
     @Column(name = "telefone")

@@ -2,6 +2,7 @@ package br.com.fiap.on_data.controller;
 
 import br.com.fiap.on_data.controller.DTO.PacienteDTO;
 import br.com.fiap.on_data.service.PacienteService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class PacienteController {
     PacienteService pacienteService;
 
     @PostMapping("/pacientes")
-    public ResponseEntity<PacienteDTO> createPaciente(@RequestBody PacienteDTO pacienteDTO) {
+    public ResponseEntity<PacienteDTO> createPaciente(@Valid @RequestBody PacienteDTO pacienteDTO) {
         return ResponseEntity.ok(pacienteService.savePaciente(pacienteDTO));
     }
 
@@ -33,7 +34,7 @@ public class PacienteController {
     }
 
     @PutMapping("/pacientes/{id}")
-    public ResponseEntity<PacienteDTO> updatePaciente(@PathVariable Long id, @RequestBody PacienteDTO pacienteDTO) {
+    public ResponseEntity<PacienteDTO> updatePaciente(@PathVariable Long id, @Valid @RequestBody PacienteDTO pacienteDTO) {
         return ResponseEntity.ok(pacienteService.updatePacienteById(id, pacienteDTO));
     }
 
