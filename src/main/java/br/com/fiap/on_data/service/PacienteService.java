@@ -1,6 +1,8 @@
 package br.com.fiap.on_data.service;
 
 import br.com.fiap.on_data.controller.DTO.PacienteDTO;
+import br.com.fiap.on_data.exception.DuplicatePacienteException;
+import br.com.fiap.on_data.exception.PacienteNotFoundException;
 import br.com.fiap.on_data.model.Paciente;
 import br.com.fiap.on_data.repository.PacienteRepository;
 import jakarta.transaction.Transactional;
@@ -22,6 +24,10 @@ public class PacienteService {
     @Transactional
     public PacienteDTO savePaciente(PacienteDTO pacienteDTO) {
         Paciente paciente = pacienteDTO.toEntity();
+        long idp = paciente.getId();
+        if(pacienteRepository.existsById(idp)){
+            throw new DuplicatePacienteException("Paciente com id " + idp + " já existe");
+        }
         return pacienteRepository.save(paciente).toDTO();
     }
 
@@ -33,7 +39,7 @@ public class PacienteService {
     }
 
     public PacienteDTO getPacienteById(Long id) {
-        Paciente paciente = pacienteRepository.findById(id).orElse(null);
+        Paciente paciente = pacienteRepository.findById(id).orElseThrow(() -> new PacienteNotFoundException("Paciente com o id " + id + " não encontrado"));
         return paciente.toDTO();
     }
 
