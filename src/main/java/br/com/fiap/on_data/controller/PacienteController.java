@@ -11,8 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1")
 public class PacienteController {
-    // TODO implementar com dto
     // TODO implementar pageable
+    // TODO colocar validação no dto, e usar @valid no controller
 
     @Autowired
     PacienteService pacienteService;
