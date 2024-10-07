@@ -29,16 +29,4 @@ public class PacienteDTO {
     private String endereco;
     private boolean fumante;
 
-    // methods
-    public Paciente toEntity() {
-        Paciente paciente = new Paciente();
-        paciente.setId(this.id);
-        paciente.setCpf(this.cpf);
-        paciente.setNome(this.nome);
-        paciente.setEmail(this.email);
-        paciente.setTelefone(this.telefone);
-        paciente.setEndereco(this.endereco);
-        paciente.setFumante(this.fumante);
-        return paciente;
-    }
 }

@@ -29,24 +29,12 @@ public class Ocorrencia {
     @Column(name = "aprovado")
     private boolean aprovado;
 
-    @ManyToOne
-    @JoinColumn(name = "id_paciente", nullable = false) // Este é o campo que cria a foreign key
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_paciente", nullable = false)
     private Paciente paciente;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_doenca", nullable = false)
     private Doenca doenca;
 
-    // methods
-    public OcorrenciaDTO toDTO() {
-        OcorrenciaDTO ocorrenciaDTO = new OcorrenciaDTO();
-        ocorrenciaDTO.setCodigoOcorrencia(this.codigoOcorrencia);
-        ocorrenciaDTO.setData(this.data);
-        ocorrenciaDTO.setValor(this.valor);
-        ocorrenciaDTO.setDuracao(this.duracao);
-        ocorrenciaDTO.setAprovado(this.aprovado);
-        ocorrenciaDTO.setIdPaciente(this.paciente.getId());
-        ocorrenciaDTO.setIdDoenca(this.doenca.getIdDoenca());
-        return ocorrenciaDTO;
-    }
 }

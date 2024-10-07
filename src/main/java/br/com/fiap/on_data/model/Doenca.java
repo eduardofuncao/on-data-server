@@ -18,11 +18,4 @@ public class Doenca {
     @Column(name = "nome_doenca")
     private String nomeDoenca;
 
-    // methods
-    public DoencaDTO toDTO() {
-        DoencaDTO doencaDTO = new DoencaDTO();
-        doencaDTO.setIdDoenca(this.idDoenca);
-        doencaDTO.setNomeDoenca(this.nomeDoenca);
-        return doencaDTO;
-    }
 }

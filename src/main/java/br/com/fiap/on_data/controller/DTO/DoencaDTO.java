@@ -11,11 +11,4 @@ public class DoencaDTO {
     private int idDoenca;
     private String nomeDoenca;
 
-    // methods
-    public Doenca toEntity() {
-        Doenca doenca = new Doenca();
-        doenca.setIdDoenca(this.idDoenca);
-        doenca.setNomeDoenca(this.nomeDoenca);
-        return doenca;
-    }
 }

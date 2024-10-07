@@ -1,6 +1,7 @@
 package br.com.fiap.on_data.service;
 
 import br.com.fiap.on_data.controller.DTO.DoencaDTO;
+import br.com.fiap.on_data.mapper.DoencaMapper;
 import br.com.fiap.on_data.model.Doenca;
 import br.com.fiap.on_data.repository.DoencaRepository;
 import jakarta.transaction.Transactional;
@@ -15,28 +16,32 @@ public class DoencaService {
     @Autowired
     private DoencaRepository doencaRepository;
 
+
+    @Autowired
+    private DoencaMapper doencaMapper;
+
     @Transactional
     public DoencaDTO saveDoenca(DoencaDTO doencaDTO) {
-        Doenca doenca = doencaDTO.toEntity();
-        return doencaRepository.save(doenca).toDTO();
+        Doenca doenca = doencaMapper.DoencaFromDTO(doencaDTO);
+        return doencaMapper.DoencaToDTO(doencaRepository.save(doenca));
     }
 
     public List<DoencaDTO> getAllDoencas() {
         List<Doenca> doencas = doencaRepository.findAll();
         return doencas.stream()
-                .map(Doenca::toDTO)
+                .map(doenca -> doencaMapper.DoencaToDTO(doenca))
                 .collect(Collectors.toList());
     }
 
     public DoencaDTO getDoencaById(int id) {
         Doenca doenca = doencaRepository.findById(id).orElse(null);
-        return doenca.toDTO();
+        return doencaMapper.DoencaToDTO(doenca);
     }
 
     public DoencaDTO updateDoencaById(int id, DoencaDTO doencaDTO) {
         Doenca doencaToUpdate = doencaRepository.findById(id).orElse(null);
         doencaToUpdate.setNomeDoenca(doencaDTO.getNomeDoenca());
-        return doencaRepository.save(doencaToUpdate).toDTO();
+        return doencaMapper.DoencaToDTO(doencaRepository.save(doencaToUpdate));
     }
 
     public void deleteDoencaById(int id) {

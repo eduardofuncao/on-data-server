@@ -36,16 +36,4 @@ public class Paciente {
     @Column(name = "fumante")
     private boolean fumante;
 
-    // methods
-    public PacienteDTO toDTO() {
-        PacienteDTO pacienteDTO = new PacienteDTO();
-        pacienteDTO.setId(this.id);
-        pacienteDTO.setCpf(this.cpf);
-        pacienteDTO.setNome(this.nome);
-        pacienteDTO.setEmail(this.email);
-        pacienteDTO.setTelefone(this.telefone);
-        pacienteDTO.setEndereco(this.endereco);
-        pacienteDTO.setFumante(this.fumante);
-        return pacienteDTO;
-    }
 }
