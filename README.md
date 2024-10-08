@@ -31,7 +31,7 @@ Na primeira etapa do projeto, foi desenvolvido um sistema modelo com Pacientes, 
 2. Rodar a aplicação Spring em `src/main/java/br/com/fiap/on_data/OnDataApplication.java` 
 
 ### Para Testar
-- Para realizar os testes da aplicação, está disponibilidada uma collection Bruno em `on-data-collection/` com requests para todos os endpoints implementados
+- Para realizar os testes da aplicação, está disponibilidada uma collection Bruno em `on-data-collection/on-data.json` com requests para todos os endpoints implementados
 - Como alternativa, o UI do swagger também pode ser usado em `http://localhost:$PORT/swagger-ui/index.html`, sendo $PORT a porta na qual a aplicação está rodando
 
 ## Diagrama de Entidades e Relacionamentos
