@@ -12,7 +12,7 @@ API REST desenvolvida com Java Springboot para o aplicativo On-Data, desenvolvid
 
 > Jhoe
 > 
-> FALTA DETALHAR
+> responsável pela implementação do README no GitHub
  
 ## Funcionalidades
 - API com toods os verbos para implementação de um crud
@@ -27,10 +27,60 @@ API REST desenvolvida com Java Springboot para o aplicativo On-Data, desenvolvid
 - Como alternativa, o UI do swagger também pode ser usado em `http://localhost:$PORT/swagger-ui/index.html`, sendo $PORT a porta na qual a aplicação está rodando
 
 ## Diagrama de Classes
-A FAZER
+A respeito do Diagram Físico não estar 100% idêntico com as Classes temos que lembrar que a aplicação ainda se trata de um MVP.
 
 ## Apresentação
 A FAZER LINK PARA VIDEO APRESENTAÇÃO
 
-## Endpoints
-LISTAR TODOS OS ENDPOINTS
+## Endpoints da API
+
+## Paciente Controller
+
+- *GET* /api/v1/pacientes/{id}  
+  Obter um paciente por ID
+
+- *PUT* /api/v1/pacientes/{id}  
+  Atualizar informações de um paciente
+
+- *DELETE* /api/v1/pacientes/{id}  
+  Excluir um paciente por ID
+
+- *GET* /api/v1/pacientes  
+  Listar todos os pacientes
+
+- *POST* /api/v1/pacientes  
+  Criar um novo paciente
+
+## Ocorrencia Controller
+
+- *GET* /api/v1/ocorrencias/{id}  
+  Obter uma ocorrência por ID
+
+- *PUT* /api/v1/ocorrencias/{id}  
+  Atualizar informações de uma ocorrência
+
+- *DELETE* /api/v1/ocorrencias/{id}  
+  Excluir uma ocorrência por ID
+
+- *GET* /api/v1/ocorrencias  
+  Listar todas as ocorrências
+
+- *POST* /api/v1/ocorrencias  
+  Criar uma nova ocorrência
+
+## Doença Controller
+
+- *GET* /api/v1/doencas/{id}  
+  Obter uma doença por ID
+
+- *PUT* /api/v1/doencas/{id}  
+  Atualizar informações de uma doença
+
+- *DELETE* /api/v1/doencas/{id}  
+  Excluir uma doença por ID
+
+- *GET* /api/v1/doencas  
+  Listar todas as doenças
+
+- *POST* /api/v1/doencas  
+  Criar uma nova doença
