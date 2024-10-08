@@ -39,7 +39,7 @@ Na primeira etapa do projeto, foi desenvolvido um sistema modelo com Pacientes, 
 **obs.:** As classes Clínica e Dentista ainda não foram implementadas. Por se tratar de um MVP, foram implementados a menor quantidade de classes necessárias para a demonstração da funcionalidade da aplicação, a fim de evitar retrabalhos em caso de mudanças no escopo do projeto.
 
 ## Apresentação
-A FAZER LINK PARA VIDEO APRESENTAÇÃO
+https://youtu.be/eZkiuw65Szw
 
 ## Endpoints da API
 
