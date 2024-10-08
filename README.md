@@ -1,5 +1,6 @@
 # On-Data Backend Server
 API REST desenvolvida com Java Springboot para o aplicativo On-Data, desenvolvido como solução de gerenciamento de sinistros para a Odontoprev.
+link Github: https://github.com/eduardofuncao/on-data-server
 
 ## Equipe
 > Artur Lopes Fiorindo » 53481
@@ -10,9 +11,16 @@ API REST desenvolvida com Java Springboot para o aplicativo On-Data, desenvolvid
 > 
 > responsável pela implementação do endpoint para pacientes
 
-> Jhoe
+> Jhoe Yoshio Kochi Hashimoto 553831
 > 
 > responsável pela implementação do README no GitHub
+
+
+## Descrição do projeto
+![OnData](https://github.com/user-attachments/assets/87ad94eb-a00e-43b5-84c4-fbf7f7b9fd7d)
+
+On Data é um ecossistema criado para auxiliar para o gerenciamento de pedidos de reembolso para sinistros em planos médicos (especialmente para planos dentários). Para isso, o sistema será responsável por classificar pacientes por classe de risco associado (baseado em histórico hospitalar, status socioeconômico) e analisar reivindicações de sinistros, facilitando o processo de aprovação por parte dos funcionários de seguradoras médicas.
+Na primeira etapa do projeto, foi desenvolvido um sistema modelo com Pacientes, Ocorrências e Doenças. As ocorrências carregam as informações da reivindicação de sinistros para os pacientes (como valor, data, doença associada, e se foi aprovada ou não), sendo os principais dados utilizados para a categorização dos pacientes e ranqueamento dos sinistros por risco associado.
  
 ## Funcionalidades
 - API com toods os verbos para implementação de um crud
