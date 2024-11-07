@@ -4,15 +4,15 @@ link Github: https://github.com/eduardofuncao/on-data-server
 
 ## Equipe
 > Artur Lopes Fiorindo » 53481
-> 
+>
 > responsável pela implementação do endpoint para ocorrências
 
-> Eduardo Felipe Nunes Função » 553362 
-> 
-> responsável pela implementação do endpoint para pacientes
+> Eduardo Felipe Nunes Função » 553362
+>
+> respnsável pela implementação do endpoint para pacientes
 
 > Jhoe Yoshio Kochi Hashimoto 553831
-> 
+>
 > responsável pela implementação do README no GitHub
 
 
@@ -21,14 +21,14 @@ link Github: https://github.com/eduardofuncao/on-data-server
 
 On Data é um ecossistema criado para auxiliar para o gerenciamento de pedidos de reembolso para sinistros em planos médicos (especialmente para planos dentários). Para isso, o sistema será responsável por classificar pacientes por classe de risco associado (baseado em histórico hospitalar, status socioeconômico) e analisar reivindicações de sinistros, facilitando o processo de aprovação por parte dos funcionários de seguradoras médicas.
 Na primeira etapa do projeto, foi desenvolvido um sistema modelo com Pacientes, Ocorrências e Doenças. As ocorrências carregam as informações da reivindicação de sinistros para os pacientes (como valor, data, doença associada, e se foi aprovada ou não), sendo os principais dados utilizados para a categorização dos pacientes e ranqueamento dos sinistros por risco associado.
- 
+
 ## Funcionalidades
 - API com toods os verbos para implementação de um crud
 - Conexão com banco de dados Oracle através de JPA/Hibernate
 
 ## Como executar
 1. Fazer o build do projeto através do arquivo Gradle `build.gradle`
-2. Rodar a aplicação Spring em `src/main/java/br/com/fiap/on_data/OnDataApplication.java` 
+2. Rodar a aplicação Spring em `src/main/java/br/com/fiap/on_data/OnDataApplication.java`
 
 ### Para Testar
 - Para realizar os testes da aplicação, está disponibilidada uma collection Bruno em `on-data-collection/on-data.json` com requests para todos os endpoints implementados
