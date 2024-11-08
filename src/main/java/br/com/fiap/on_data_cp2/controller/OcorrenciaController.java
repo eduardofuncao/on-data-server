@@ -23,11 +23,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 @RequestMapping("/ocorrencias")
 public class OcorrenciaController {
-    @Autowired
+
     private OcorrenciaService ocorrenciaService;
-    @Autowired
+
     private OcorrenciaRepository ocorrenciaRepository;
-    @Autowired
+    
     private CodePointLengthValidator codePointLengthValidator;
 
     @PostMapping

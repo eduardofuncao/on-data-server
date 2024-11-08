@@ -5,6 +5,8 @@ import br.com.fiap.on_data_cp2.entity.Dentista;
 import br.com.fiap.on_data_cp2.entity.Doenca;
 import br.com.fiap.on_data_cp2.entity.Ocorrencia;
 import br.com.fiap.on_data_cp2.entity.Paciente;
+import br.com.fiap.on_data_cp2.exception.DataFuturaException;
+import br.com.fiap.on_data_cp2.exception.NaoEncontradoException;
 import br.com.fiap.on_data_cp2.repository.DentistaRepository;
 import br.com.fiap.on_data_cp2.repository.DoencaRepository;
 import br.com.fiap.on_data_cp2.repository.OcorrenciaRepository;
@@ -14,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,6 +37,13 @@ public class OcorrenciaService {
 
     public OcorrenciaDTO criarOcorrencia(OcorrenciaDTO ocorrenciaDTO) {
         Ocorrencia ocorrencia = convertToEntity(ocorrenciaDTO);
+
+        //checa se data da ocorrência não é futura
+        if (ocorrencia.getData() != null) {
+            if (ocorrencia.getData().isAfter(LocalDateTime.now())){
+                throw new DataFuturaException("Não é possível criar uma Ocorrência com data futura");
+            }
+        }
 
         Paciente paciente = pacienteRepository.findById(ocorrenciaDTO.getPacienteId())
                 .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
@@ -76,7 +86,7 @@ public class OcorrenciaService {
 
     public OcorrenciaDTO buscarOcorrenciaPorId(Long id) {
         Ocorrencia foundOcorrencia = ocorrenciaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Clínica não encontrada"));
+                .orElseThrow(() -> new NaoEncontradoException("Clínica não encontrada"));
         return convertToDTO(foundOcorrencia);
     }
 
@@ -84,7 +94,7 @@ public class OcorrenciaService {
 
     public OcorrenciaDTO aprovarOcorrencia(Long id) {
         Ocorrencia foundOcorrencia = ocorrenciaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ocorrencia não encontrada"));
+                .orElseThrow(() -> new NaoEncontradoException("Ocorrencia não encontrada"));
         foundOcorrencia.setAprovado(true);
         return convertToDTO(ocorrenciaRepository.save(foundOcorrencia));
     }

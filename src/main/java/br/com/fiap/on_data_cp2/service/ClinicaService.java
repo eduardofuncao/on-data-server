@@ -2,6 +2,7 @@ package br.com.fiap.on_data_cp2.service;
 
 import br.com.fiap.on_data_cp2.controller.dto.ClinicaDTO;
 import br.com.fiap.on_data_cp2.entity.Clinica;
+import br.com.fiap.on_data_cp2.exception.NaoEncontradoException;
 import br.com.fiap.on_data_cp2.repository.ClinicaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,7 +27,7 @@ public class ClinicaService {
 
     public ClinicaDTO buscarClinicaPorId(Long id) {
         Clinica foundClinica = clinicaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Clínica não encontrada"));
+                .orElseThrow(() -> new NaoEncontradoException("Clínica não encontrada"));
         return convertToDTO(foundClinica);
     }
 

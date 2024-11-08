@@ -5,6 +5,7 @@ import br.com.fiap.on_data_cp2.entity.Categoria;
 import br.com.fiap.on_data_cp2.entity.Genero;
 import br.com.fiap.on_data_cp2.entity.Ocorrencia;
 import br.com.fiap.on_data_cp2.entity.Paciente;
+import br.com.fiap.on_data_cp2.exception.NaoEncontradoException;
 import br.com.fiap.on_data_cp2.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,7 +32,7 @@ public class PacienteService {
 
     public PacienteDTO buscarPacientePorId(Long id) {
         Paciente foundPaciente = pacienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Clínica não encontrada"));
+                .orElseThrow(() -> new NaoEncontradoException("Clínica não encontrada"));
         return convertToDTO(foundPaciente);
     }
 

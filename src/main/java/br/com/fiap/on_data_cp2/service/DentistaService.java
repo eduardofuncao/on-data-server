@@ -3,12 +3,16 @@ package br.com.fiap.on_data_cp2.service;
 import br.com.fiap.on_data_cp2.controller.dto.DentistaDTO;
 import br.com.fiap.on_data_cp2.entity.Clinica;
 import br.com.fiap.on_data_cp2.entity.Dentista;
+import br.com.fiap.on_data_cp2.exception.DentistaDuplicadoException;
+import br.com.fiap.on_data_cp2.exception.NaoEncontradoException;
 import br.com.fiap.on_data_cp2.repository.ClinicaRepository;
 import br.com.fiap.on_data_cp2.repository.DentistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class DentistaService {
@@ -22,8 +26,17 @@ public class DentistaService {
     public DentistaDTO criarDentista(DentistaDTO dentistaDTO) {
         Dentista dentista = convertToEntity(dentistaDTO);
 
+        // checando se há outro dentista com o mesmo registro
+        if (dentista.getRegistro() != null && !dentista.getRegistro().isEmpty()) {
+            Optional<Dentista> existingOcorrencia = dentistaRepository.findByRegistro(dentista.getRegistro());
+
+            if (existingOcorrencia.isPresent()) {
+                throw new DentistaDuplicadoException("Dentista com número de registro " + dentista.getRegistro() + " já existe.");
+            }
+        }
+
         Clinica clinica = clinicaRepository.findById(dentistaDTO.getClinicaId())
-                .orElseThrow(() -> new RuntimeException("Clínica não encontrada"));
+                .orElseThrow(() -> new NaoEncontradoException("Clínica não encontrada"));
         dentista.setClinica(clinica);
 
         Dentista savedDentista = dentistaRepository.save(dentista);
@@ -37,7 +50,7 @@ public class DentistaService {
 
     public DentistaDTO buscarDentistaPorId(Long id) {
         Dentista foundDentista = dentistaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Clínica não encontrada"));
+                .orElseThrow(() -> new NaoEncontradoException("Clínica não encontrada"));
         return convertToDTO(foundDentista);
     }
 
