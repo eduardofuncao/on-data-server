@@ -3,11 +3,22 @@ package br.com.fiap.on_data_cp2.controller;
 import br.com.fiap.on_data_cp2.controller.dto.OcorrenciaDTO;
 import br.com.fiap.on_data_cp2.repository.OcorrenciaRepository;
 import br.com.fiap.on_data_cp2.service.OcorrenciaService;
+import org.hibernate.validator.internal.constraintvalidators.hv.CodePointLengthValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/ocorrencias")
@@ -16,15 +27,31 @@ public class OcorrenciaController {
     private OcorrenciaService ocorrenciaService;
     @Autowired
     private OcorrenciaRepository ocorrenciaRepository;
+    @Autowired
+    private CodePointLengthValidator codePointLengthValidator;
 
     @PostMapping
     ResponseEntity<OcorrenciaDTO> criarOcorrencia(@RequestBody OcorrenciaDTO ocorrenciaDTO){
-        return ResponseEntity.ok(ocorrenciaService.criarOcorrencia(ocorrenciaDTO));
+        OcorrenciaDTO createdOcorrencia = ocorrenciaService.criarOcorrencia((ocorrenciaDTO));
+
+        createdOcorrencia.add(linkTo(methodOn(OcorrenciaController.class).listarOcorrencias()).withRel("ocorrencias"));
+        createdOcorrencia.add(linkTo(methodOn(OcorrenciaController.class).listarOcorrenciasReprovadas()).withRel("reprovadas"));
+        createdOcorrencia.add(linkTo(methodOn(OcorrenciaController.class).aprovarOcorrencia(createdOcorrencia.getId())).withRel("aprovar"));
+        createdOcorrencia.add(linkTo(methodOn(OcorrenciaController.class).deletarOcorrencia(createdOcorrencia.getId())).withRel("deletar"));
+
+        createdOcorrencia.add(linkTo(methodOn(PacienteController.class).buscarPacientePorId(createdOcorrencia.getPacienteId())).withRel("paciente"));
+
+        return ResponseEntity.ok(createdOcorrencia);
     }
 
     @GetMapping
-    ResponseEntity<Page<OcorrenciaDTO>> listarOcorrencias(Pageable pageable){
-        return ResponseEntity.ok(ocorrenciaService.listarOcorrencias(pageable));
+    ResponseEntity<CollectionModel<OcorrenciaDTO>> listarOcorrencias(){
+        List<OcorrenciaDTO> ocorrencias = ocorrenciaService.listarOcorrencias();
+
+        CollectionModel<OcorrenciaDTO> collectionModel = CollectionModel.of(ocorrencias);
+
+        collectionModel.add(linkTo(methodOn(OcorrenciaController.class).listarOcorrenciasAprovadas()).withRel("aprovadas"));
+        return ResponseEntity.ok(collectionModel);
     }
 
     @GetMapping("/{id}")
@@ -50,4 +77,28 @@ public class OcorrenciaController {
         ocorrenciaService.deletarOcorrencia(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/aprovar/{id}")
+    public ResponseEntity<OcorrenciaDTO> aprovarOcorrencia(@PathVariable Long id){
+        OcorrenciaDTO ocorrenciaAprovada = ocorrenciaService.aprovarOcorrencia(id);
+        ocorrenciaAprovada.add(linkTo(methodOn(OcorrenciaController.class).listarOcorrenciasAprovadas()).withRel("aprovadas"));
+        return ResponseEntity.ok(ocorrenciaAprovada);
+    }
+
+    @GetMapping("/aprovadas")
+    public ResponseEntity<List<OcorrenciaDTO>> listarOcorrenciasAprovadas(){
+        return ResponseEntity.ok(ocorrenciaService.listarOcorrenciasAprovadas());
+    }
+
+    @GetMapping("/reprovadas")
+    public ResponseEntity<List<OcorrenciaDTO>> listarOcorrenciasReprovadas(){
+        List<OcorrenciaDTO> ocorrenciasDTO = ocorrenciaService.listarOcorrenciasReprovadas();
+
+        ocorrenciasDTO.forEach(ocorrenciaDTO -> {
+            ocorrenciaDTO.add(linkTo(methodOn(OcorrenciaController.class).aprovarOcorrencia(ocorrenciaDTO.getId())).withRel("aprovar"));
+        });
+
+        return ResponseEntity.ok(ocorrenciasDTO);
+    }
+
 }

@@ -1,8 +1,11 @@
 package br.com.fiap.on_data_cp2.controller.dto;
 
+import br.com.fiap.on_data_cp2.entity.Ocorrencia;
+import org.springframework.hateoas.RepresentationModel;
+
 import java.time.LocalDateTime;
 
-public class OcorrenciaDTO {
+public class OcorrenciaDTO extends RepresentationModel<OcorrenciaDTO> {
     private long id;
     private LocalDateTime data;
 
@@ -11,6 +14,8 @@ public class OcorrenciaDTO {
     private double valor;
 
     private int duracaoHoras;
+
+    private boolean aprovada;
 
     private long pacienteId;
 
@@ -56,6 +61,14 @@ public class OcorrenciaDTO {
 
     public void setDuracaoHoras(int duracaoHoras) {
         this.duracaoHoras = duracaoHoras;
+    }
+
+    public boolean isAprovada() {
+        return aprovada;
+    }
+
+    public void setAprovada(boolean aprovada) {
+        this.aprovada = aprovada;
     }
 
     public long getPacienteId() {

@@ -1,6 +1,7 @@
 package br.com.fiap.on_data_cp2.entity;
 
 import jakarta.persistence.*;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -19,6 +20,8 @@ public class Ocorrencia {
 
     private int duracaoHoras;
 
+    private boolean aprovado;
+
     @ManyToOne
     private Paciente paciente;
 
@@ -31,13 +34,14 @@ public class Ocorrencia {
     public Ocorrencia() {
     }
 
-    public Ocorrencia(long id, LocalDateTime data, String codigoOcorrencia, double valor, int duracaoHoras, Paciente paciente, Doenca doenca, Dentista dentista) {
+    public Ocorrencia(long id, LocalDateTime data, String codigoOcorrencia, double valor, int duracaoHoras, Paciente paciente, boolean aprovado, Doenca doenca, Dentista dentista) {
         this.id = id;
         this.data = data;
         this.codigoOcorrencia = codigoOcorrencia;
         this.valor = valor;
         this.duracaoHoras = duracaoHoras;
         this.paciente = paciente;
+        this.aprovado = aprovado;
         this.doenca = doenca;
         this.dentista = dentista;
     }
@@ -80,6 +84,14 @@ public class Ocorrencia {
 
     public void setDuracaoHoras(int duracaoHoras) {
         this.duracaoHoras = duracaoHoras;
+    }
+
+    public boolean isAprovado() {
+        return aprovado;
+    }
+
+    public void setAprovado(boolean aprovado) {
+        this.aprovado = aprovado;
     }
 
     public Paciente getPaciente() {

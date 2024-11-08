@@ -52,4 +52,5 @@ public class PacienteController {
         pacienteService.deletarPaciente(id);
         return ResponseEntity.noContent().build();
     }
+
 }

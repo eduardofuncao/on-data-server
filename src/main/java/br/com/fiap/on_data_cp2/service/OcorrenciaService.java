@@ -14,6 +14,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class OcorrenciaService {
 
@@ -50,8 +53,25 @@ public class OcorrenciaService {
         return ocorrenciaDTO;
     }
 
-    public Page<OcorrenciaDTO> listarOcorrencias(Pageable pageable) {
-        return ocorrenciaRepository.findAll(pageable).map(this::convertToDTO);
+    public List<OcorrenciaDTO> listarOcorrencias() {
+        return ocorrenciaRepository.findAll()
+                .stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<OcorrenciaDTO> listarOcorrenciasAprovadas() {
+        return ocorrenciaRepository.findByAprovadoTrue()
+                .stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<OcorrenciaDTO> listarOcorrenciasReprovadas() {
+        return ocorrenciaRepository.findByAprovadoFalse()
+                .stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     public OcorrenciaDTO buscarOcorrenciaPorId(Long id) {
@@ -61,6 +81,13 @@ public class OcorrenciaService {
     }
 
     public void deletarOcorrencia(Long id) {ocorrenciaRepository.deleteById(id);}
+
+    public OcorrenciaDTO aprovarOcorrencia(Long id) {
+        Ocorrencia foundOcorrencia = ocorrenciaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ocorrencia não encontrada"));
+        foundOcorrencia.setAprovado(true);
+        return convertToDTO(ocorrenciaRepository.save(foundOcorrencia));
+    }
 
     private OcorrenciaDTO convertToDTO(Ocorrencia ocorrencia) {
         OcorrenciaDTO ocorrenciaDTO = new OcorrenciaDTO();
