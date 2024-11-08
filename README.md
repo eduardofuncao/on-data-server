@@ -38,6 +38,10 @@ Na primeira etapa do projeto, foi desenvolvido um sistema modelo com Pacientes, 
 ![Untitled](https://github.com/user-attachments/assets/a65fefc6-89d1-40ab-9486-03b65be135db)
 **obs.:** As classes Clínica e Dentista ainda não foram implementadas. Por se tratar de um MVP, foram implementados a menor quantidade de classes necessárias para a demonstração da funcionalidade da aplicação, a fim de evitar retrabalhos em caso de mudanças no escopo do projeto.
 
+## Implementação hateoas
+Foi implementado o paradigma hateoas no fluxo de aprov ação de ocorrências, conforme o diagrama a seguir:
+![image](https://github.com/user-attachments/assets/016f526d-b829-440f-8f9e-7c85cf71c487)
+
 ## Apresentação
 https://youtu.be/eZkiuw65Szw
 
