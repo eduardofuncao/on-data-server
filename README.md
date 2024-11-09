@@ -61,14 +61,17 @@ https://youtu.be/eZkiuw65Szw
 
 
 ## Cronograma de atividades
-| Data  | Responsável    | Atividade                                                                            | Status       |
-| ----- | -------------- | ------------------------------------------------------------------------------------ | ------------ |
-| 01/07 | Grupo          | Ideação do projeto                                                                   | Concluído    |
-| 02/07 | Jhoe           | Criação do diagrama de classes e diagramas de entidades                              | Concluído    |
-| 05/07 | Eduardo        | Desenvolvimento do modelo, controller, service e repository para a classe Paciente   | Concluído    |
-| 10/07 | Artur          | Desenvolvimento do modelo, controller, service e repository para a classe Ocorrência | Concluído    |
-| 10/07 | Artur          | Desenvolvimento do modelo, controller, service e repository para a classe Doença     | Concluído    |
-| 15/07 | Jhoe           | Adaptação do código para inclusão de DTO                                             | Concluído    |
-| 20/07 | Eduardo        | Criação de ErrorHandler Global                                                       | Concluído    |
+| Data  | Responsável | Atividade                                                                            | Status       |
+|-------|----------| ------------------------------------------------------------------------------------ |--------------|
+| 01/07 | Grupo    | Ideação do projeto                                                                   | Concluído    |
+| 02/07 | Jhoe     | Criação do diagrama de classes e diagramas de entidades                              | Concluído    |
+| 05/07 | Eduardo  | Desenvolvimento do modelo, controller, service e repository para a classe Paciente   | Concluído    |
+| 10/07 | Artur    | Desenvolvimento do modelo, controller, service e repository para a classe Ocorrência | Concluído    |
+| 10/07 | Artur    | Desenvolvimento do modelo, controller, service e repository para a classe Doença     | Concluído    |
+| 15/07 | Jhoe     | Adaptação do código para inclusão de DTO                                             | Concluído    |
+| 20/07 | Eduardo  | Criação de ErrorHandler Global                                                       | Concluído    |
 | 10/10 | Eduardo, Artur | Implementação de classes de erro personalizadas                                      | Em Progresso |
-| 15/10 | Artur, Jhoe    | Implementação das classes de Clínica e Dentista                                      | A fazer      |
+| 15/10 | Artur, Jhoe | Implementação das classes de Clínica e Dentista                                      | A fazer      | 
+| 01/11 | Eduardo  | Refatoração do código para inclusão de boas práticas de programação                                      | Concluído    | 
+| 09/11 | Artur    | Inclusão de HATEOAS para o fluxo de aprovação de ocorrências                                      | Concluído      | 
+| 25/11 | Jhoe     | Implementação de autenticação com Spring Security e JWT                                       | Concluído      | 
