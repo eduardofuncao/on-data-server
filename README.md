@@ -31,16 +31,16 @@ Na primeira etapa do projeto, foi desenvolvido um sistema modelo com Pacientes, 
 2. Rodar a aplicação Spring em `src/main/java/br/com/fiap/on_data/OnDataApplication.java`
 
 ### Para Testar
-- Para realizar os testes da aplicação, está disponibilidada uma collection Bruno em `on-data-collection/on-data.json` com requests para todos os endpoints implementados
+- Para realizar os testes da aplicação, está disponibilidada uma collection Insomnia em `on-data-collection/` com requests para todos os endpoints implementados
 - Como alternativa, o UI do swagger também pode ser usado em `http://localhost:$PORT/swagger-ui/index.html`, sendo $PORT a porta na qual a aplicação está rodando
 
 ## Diagrama de Entidades e Relacionamentos
-![Untitled](https://github.com/user-attachments/assets/a65fefc6-89d1-40ab-9486-03b65be135db)
-**obs.:** As classes Clínica e Dentista ainda não foram implementadas. Por se tratar de um MVP, foram implementados a menor quantidade de classes necessárias para a demonstração da funcionalidade da aplicação, a fim de evitar retrabalhos em caso de mudanças no escopo do projeto.
+![Untitled](https://github.com/user-attachments/assets/1f80d9cb-08d4-4d96-8207-a67ef1b229ce)
 
 ## Implementação hateoas
 Foi implementado o paradigma hateoas no fluxo de aprov ação de ocorrências, conforme o diagrama a seguir:
 ![image](https://github.com/user-attachments/assets/016f526d-b829-440f-8f9e-7c85cf71c487)
+Para todas as conexões deste fluxo, é possível visualizar a próxima etapa através de um link hateoas. O fluxo escolhido foi o de prospecção de ocorrências não aprovadas para posterior aprovação do funcionário da empresa de plano de saúde.
 
 ## Apresentação
 https://youtu.be/eZkiuw65Szw
@@ -49,54 +49,16 @@ https://youtu.be/eZkiuw65Szw
 
 ### Paciente Controller
 
-- *GET* /api/v1/pacientes/{id}  
-  Obter um paciente por ID
+![image](https://github.com/user-attachments/assets/d3671843-a6c8-45fc-8171-e7e6f3feb772)
 
-- *PUT* /api/v1/pacientes/{id}  
-  Atualizar informações de um paciente
+![image](https://github.com/user-attachments/assets/71e1a1cf-3c75-4964-9dd8-2169d8c3064b)
 
-- *DELETE* /api/v1/pacientes/{id}  
-  Excluir um paciente por ID
+![image](https://github.com/user-attachments/assets/109c160f-ba61-407c-aff9-5636ad4c8a48)
 
-- *GET* /api/v1/pacientes  
-  Listar todos os pacientes
+![image](https://github.com/user-attachments/assets/64896e57-9eb4-4af1-b4af-832f4937f2db)
 
-- *POST* /api/v1/pacientes  
-  Criar um novo paciente
+![image](https://github.com/user-attachments/assets/a44939e5-215e-41a9-a52c-ef8a77e79ef4)
 
-### Ocorrencia Controller
-
-- *GET* /api/v1/ocorrencias/{id}  
-  Obter uma ocorrência por ID
-
-- *PUT* /api/v1/ocorrencias/{id}  
-  Atualizar informações de uma ocorrência
-
-- *DELETE* /api/v1/ocorrencias/{id}  
-  Excluir uma ocorrência por ID
-
-- *GET* /api/v1/ocorrencias  
-  Listar todas as ocorrências
-
-- *POST* /api/v1/ocorrencias  
-  Criar uma nova ocorrência
-
-### Doença Controller
-
-- *GET* /api/v1/doencas/{id}  
-  Obter uma doença por ID
-
-- *PUT* /api/v1/doencas/{id}  
-  Atualizar informações de uma doença
-
-- *DELETE* /api/v1/doencas/{id}  
-  Excluir uma doença por ID
-
-- *GET* /api/v1/doencas  
-  Listar todas as doenças
-
-- *POST* /api/v1/doencas  
-  Criar uma nova doença
 
 ## Cronograma de atividades
 | Data  | Responsável    | Atividade                                                                            | Status       |
