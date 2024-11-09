@@ -4,16 +4,13 @@ link Github: https://github.com/eduardofuncao/on-data-server
 
 ## Equipe
 > Artur Lopes Fiorindo » 53481
->
-> responsável pela implementação do endpoint para ocorrências
+
 
 > Eduardo Felipe Nunes Função » 553362
->
-> respnsável pela implementação do endpoint para pacientes
 
-> Jhoe Yoshio Kochi Hashimoto 553831
->
-> responsável pela implementação do README no GitHub
+
+> Jhoe Yoshio Kochi Hashimoto » 553831
+
 
 
 ## Descrição do projeto
