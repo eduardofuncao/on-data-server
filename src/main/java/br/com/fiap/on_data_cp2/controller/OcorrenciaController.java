@@ -24,11 +24,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RequestMapping("/ocorrencias")
 public class OcorrenciaController {
 
+    @Autowired
     private OcorrenciaService ocorrenciaService;
-
-    private OcorrenciaRepository ocorrenciaRepository;
-    
-    private CodePointLengthValidator codePointLengthValidator;
 
     @PostMapping
     ResponseEntity<OcorrenciaDTO> criarOcorrencia(@RequestBody OcorrenciaDTO ocorrenciaDTO){

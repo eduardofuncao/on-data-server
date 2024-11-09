@@ -32,7 +32,7 @@ public class PacienteService {
 
     public PacienteDTO buscarPacientePorId(Long id) {
         Paciente foundPaciente = pacienteRepository.findById(id)
-                .orElseThrow(() -> new NaoEncontradoException("Clínica não encontrada"));
+                .orElseThrow(() -> new NaoEncontradoException("Paciente não encontrado"));
         return convertToDTO(foundPaciente);
     }
 
@@ -55,6 +55,7 @@ public class PacienteService {
 
     private Paciente convertToEntity(PacienteDTO pacienteDTO) {
         Paciente paciente = new Paciente();
+        if(pacienteDTO.getId() != null) {paciente.setId(pacienteDTO.getId());}
         paciente.setNome(pacienteDTO.getNome());
         paciente.setGenero(pacienteDTO.getGenero());
         paciente.setEndereco(pacienteDTO.getEndereco());

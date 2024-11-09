@@ -4,6 +4,7 @@ import br.com.fiap.on_data_cp2.controller.dto.ErroDetalhesDTO;
 import br.com.fiap.on_data_cp2.exception.DataFuturaException;
 import br.com.fiap.on_data_cp2.exception.DentistaDuplicadoException;
 import br.com.fiap.on_data_cp2.exception.NaoEncontradoException;
+import br.com.fiap.on_data_cp2.exception.OcorrenciaJaAprovadaException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,4 +34,11 @@ public class GlobalExceptionHandler {
         ErroDetalhesDTO erroDetalhes = new ErroDetalhesDTO(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(erroDetalhes, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(OcorrenciaJaAprovadaException.class)
+    public ResponseEntity<ErroDetalhesDTO> handleOcorrenciaJaAprovadaException(OcorrenciaJaAprovadaException ex, WebRequest request) {
+        ErroDetalhesDTO erroDetalhes = new ErroDetalhesDTO(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(erroDetalhes, HttpStatus.NOT_FOUND);
+    }
+
 }

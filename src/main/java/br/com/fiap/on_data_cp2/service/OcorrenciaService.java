@@ -7,6 +7,7 @@ import br.com.fiap.on_data_cp2.entity.Ocorrencia;
 import br.com.fiap.on_data_cp2.entity.Paciente;
 import br.com.fiap.on_data_cp2.exception.DataFuturaException;
 import br.com.fiap.on_data_cp2.exception.NaoEncontradoException;
+import br.com.fiap.on_data_cp2.exception.OcorrenciaJaAprovadaException;
 import br.com.fiap.on_data_cp2.repository.DentistaRepository;
 import br.com.fiap.on_data_cp2.repository.DoencaRepository;
 import br.com.fiap.on_data_cp2.repository.OcorrenciaRepository;
@@ -40,7 +41,7 @@ public class OcorrenciaService {
 
         //checa se data da ocorrência não é futura
         if (ocorrencia.getData() != null) {
-            if (ocorrencia.getData().isAfter(LocalDateTime.now())){
+            if (ocorrencia.getData().isAfter(LocalDateTime.now().plusDays(1))){
                 throw new DataFuturaException("Não é possível criar uma Ocorrência com data futura");
             }
         }
@@ -86,7 +87,7 @@ public class OcorrenciaService {
 
     public OcorrenciaDTO buscarOcorrenciaPorId(Long id) {
         Ocorrencia foundOcorrencia = ocorrenciaRepository.findById(id)
-                .orElseThrow(() -> new NaoEncontradoException("Clínica não encontrada"));
+                .orElseThrow(() -> new NaoEncontradoException("Ocorrência não encontrada"));
         return convertToDTO(foundOcorrencia);
     }
 
@@ -95,6 +96,9 @@ public class OcorrenciaService {
     public OcorrenciaDTO aprovarOcorrencia(Long id) {
         Ocorrencia foundOcorrencia = ocorrenciaRepository.findById(id)
                 .orElseThrow(() -> new NaoEncontradoException("Ocorrencia não encontrada"));
+        if(foundOcorrencia.isAprovado()) {
+            throw new OcorrenciaJaAprovadaException("A ocorrência já está aprovada");
+        }
         foundOcorrencia.setAprovado(true);
         return convertToDTO(ocorrenciaRepository.save(foundOcorrencia));
     }
@@ -104,6 +108,7 @@ public class OcorrenciaService {
         ocorrenciaDTO.setId(ocorrencia.getId());
         ocorrenciaDTO.setData(ocorrencia.getData());
         ocorrenciaDTO.setCodigoOcorrencia(ocorrencia.getCodigoOcorrencia());
+        ocorrenciaDTO.setAprovada(ocorrencia.isAprovado());
         ocorrenciaDTO.setValor(ocorrencia.getValor());
         ocorrenciaDTO.setDuracaoHoras(ocorrencia.getDuracaoHoras());
 
@@ -112,6 +117,7 @@ public class OcorrenciaService {
 
     private Ocorrencia convertToEntity(OcorrenciaDTO ocorrenciaDTO) {
         Ocorrencia ocorrencia = new Ocorrencia();
+        ocorrencia.setId(ocorrenciaDTO.getId());
         ocorrencia.setData(ocorrenciaDTO.getData());
         ocorrencia.setCodigoOcorrencia(ocorrenciaDTO.getCodigoOcorrencia());
         ocorrencia.setValor(ocorrenciaDTO.getValor());

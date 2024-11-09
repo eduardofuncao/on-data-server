@@ -27,7 +27,7 @@ public class DoencaService {
 
     public DoencaDTO buscarDoencaPorId(Long id) {
         Doenca foundDoenca = doencaRepository.findById(id)
-                .orElseThrow(() -> new NaoEncontradoException("Clínica não encontrada"));
+                .orElseThrow(() -> new NaoEncontradoException("Doença não encontrada"));
         return convertToDTO(foundDoenca);
     }
 
@@ -45,6 +45,7 @@ public class DoencaService {
 
     private Doenca convertToEntity(DoencaDTO doencaDTO) {
         Doenca doenca = new Doenca();
+        doenca.setId(doencaDTO.getId());
         doenca.setNome(doencaDTO.getNome());
         doenca.setTaxaReincidencia(doencaDTO.getTaxaReincidencia());
         doenca.setGravidade(doencaDTO.getGravidade());

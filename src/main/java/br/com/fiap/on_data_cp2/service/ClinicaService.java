@@ -46,6 +46,7 @@ public class ClinicaService {
 
     private Clinica convertToEntity(ClinicaDTO clinicaDTO) {
         Clinica clinica = new Clinica();
+        clinica.setId(clinicaDTO.getId());
         clinica.setNome(clinicaDTO.getNome());
         clinica.setEndereco(clinicaDTO.getEndereco());
         clinica.setCidade(clinicaDTO.getCidade());

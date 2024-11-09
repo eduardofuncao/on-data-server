@@ -50,7 +50,7 @@ public class DentistaService {
 
     public DentistaDTO buscarDentistaPorId(Long id) {
         Dentista foundDentista = dentistaRepository.findById(id)
-                .orElseThrow(() -> new NaoEncontradoException("Clínica não encontrada"));
+                .orElseThrow(() -> new NaoEncontradoException("Dentista não encontrada"));
         return convertToDTO(foundDentista);
     }
 
@@ -69,6 +69,7 @@ public class DentistaService {
 
     private Dentista convertToEntity(DentistaDTO dentistaDTO) {
         Dentista dentista = new Dentista();
+        dentista.setId(dentistaDTO.getId());
         dentista.setNome(dentistaDTO.getNome());
         dentista.setIdade(dentistaDTO.getIdade());
         dentista.setRegistro(dentistaDTO.getRegistro());

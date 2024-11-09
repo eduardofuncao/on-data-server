@@ -35,6 +35,11 @@ public class PacienteController {
     @PutMapping("/{id}")
     public ResponseEntity<PacienteDTO> atualizarPaciente(@PathVariable Long id, @RequestBody PacienteDTO pacienteAtualizada){
         PacienteDTO pacienteEncontrada = pacienteService.buscarPacientePorId(id);
+
+        if (pacienteEncontrada == null) {
+            return ResponseEntity.notFound().build();
+        }
+
         pacienteEncontrada.setNome(pacienteAtualizada.getNome());
         pacienteEncontrada.setGenero(pacienteAtualizada.getGenero());
         pacienteEncontrada.setIdade(pacienteAtualizada.getIdade());
@@ -52,5 +57,4 @@ public class PacienteController {
         pacienteService.deletarPaciente(id);
         return ResponseEntity.noContent().build();
     }
-
 }
