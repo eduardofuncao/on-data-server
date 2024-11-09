@@ -39,7 +39,7 @@ Na primeira etapa do projeto, foi desenvolvido um sistema modelo com Pacientes, 
 
 ## Implementação hateoas
 Foi implementado o paradigma hateoas no fluxo de aprov ação de ocorrências, conforme o diagrama a seguir:
-![image](https://github.com/user-attachments/assets/016f526d-b829-440f-8f9e-7c85cf71c487)
+![image](https://github.com/user-attachments/assets/62e3f5c3-9df9-483b-8db9-091fd009ac4b)
 Para todas as conexões deste fluxo, é possível visualizar a próxima etapa através de um link hateoas. O fluxo escolhido foi o de prospecção de ocorrências não aprovadas para posterior aprovação do funcionário da empresa de plano de saúde.
 
 ## Apresentação
